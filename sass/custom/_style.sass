@@ -1,26 +1,34 @@
+/*------------------------------------*/
+/*  變數  
+/*------------------------------------*/
+$row: 100px
+$column: 120px 
+
+
 =title()
   font-size: 46px
   font-weight: bold
+  @media (max-width: 479px)
+    font-size: 30px
+    white-space: nowrap
+
 =subtitle()
   font-size: 24px
   font-weight: 600
   font-style: italic
+  @media (max-width: 479px)
+    font-size: 20px
+    white-space: nowrap
+
 =stripe($deg)
   background: linear-gradient($deg, $primary 25%, transparent 0, transparent 50%, $primary 0, $primary 75%, transparent 0)     
   background-size: 50px 50px
 
-
-
-/*------------------------------------*/
-/*  變數  
-/*------------------------------------*/
-$shift-column: 120px   // 設計稿 column 120px (位移半行)
-$shift-row: 100px      // 設計稿 row    100px (位移半欄)
-
-  
-/*------------------------------------*/
-/*  位移 
-/*------------------------------------*/
+/* 位移 Row & Column */
+=translateXY($shift-column: $column, $shift-row: $row)
+  transform: translate($shift-column, $shift-row)
+  @media (max-width: 479px)
+    transform: translate($shift-column/1.6, $shift-row/1.1)
 
 
 /*------------------------------------*/
@@ -59,23 +67,22 @@ body
 /*  Item Grid   
 /*------------------------------------*/  
 .grid-container-item
-  +size(100%) // +size(480px, 500px)  // 改容器設上寬度，讓columns的寬彈性分佈
+  +size(100%)           // height: 100%， 4*5 的每格高度會一致均 | height: auto 每格高度會彈性變化
   max-width: 480px
-  max-height: 500px  // RWD
+  max-height: 500px
   
   display: grid
-  grid-template-rows: repeat(5, 100px)  // 又改成固定寬度，如果行列沒填滿 方格寬高比例會跑掉
-  grid-template-columns: repeat(4, 120px)  // 改用彈性的方式 // old grid-template-columns: repeat(4, 120px)
+  grid-template-rows: repeat(5, 1fr)
+  grid-template-columns: repeat(4, 1fr) 
 
-@media (max-width: 1199px)
+@media (max-width: 479px)
   .grid-container-item
-    +size(100%, auto)
-    grid-template-rows: repeat(5, 20%)  
-    grid-template-columns: repeat(4, 1fr)  
+    max-width: 320px
+    max-height: 330px
 
 
 /*------------------------------------*/
-/*  元件樣式   
+/*  元素樣式   
 /*------------------------------------*/
 [class*="-title"]  
   position: relative
@@ -118,6 +125,7 @@ body
 
 [class*="-borderBox"]
   border: 20px solid $green
+  z-index: -1
 
 [class*="-subtitle"]
   +subtitle()
@@ -125,6 +133,7 @@ body
 
 [class*="-box"]
   background-color: $primary
+  z-index: -1
 
 
 
@@ -159,7 +168,7 @@ body
     grid-row: 4 / span 2
     grid-column: 4 / span 1
     writing-mode: vertical-lr
-    transform: translateX($shift-column)
+    +translateXY($column,0)
 
   .item-stripe
     grid-row: -1 / -3
@@ -170,7 +179,7 @@ body
     grid-row: 1 / span 3
     grid-column: 2 / span 3
     margin: 40px 50px
-    transform: translate($shift-column, -$shift-row)
+    +translateXY($column,-$row)
 
 
 
@@ -181,7 +190,7 @@ body
   .item-title
     grid-row: 4 / span 1
     grid-column: 3 / span 2
-    margin-top: 18px
+    align-self: center
     &:before
       content: 'FREELIFT'
     &:after
@@ -194,12 +203,13 @@ body
   .item-number
     grid-row: 1 / span 1
     grid-column: -1 / -2
-    text-align: right
+    justify-self: end
 
   .item-subtitle
     grid-row: 1 / span 1
     grid-column: 1 / span 2
-    text-align: right
+    justify-self: end
+    align-self: end
 
   .item-borderBox
     grid-row: 1 / span 2
@@ -218,13 +228,15 @@ body
 .C-item
   .item-title
     grid-row: 1 / span 1
-    grid-column: 2 / span 3
-    text-align: right
-    margin-top: 50px
+    grid-column: 1 / -1
+    justify-self: end
+    align-self: end
     &:before
       content: 'SUPER SKINNY'
+      right: 0
     &:after
       content: 'SUPER SKINNY'
+      right: 0
 
   .item-img
     grid-row: 2 / span 2
@@ -233,8 +245,8 @@ body
   .item-number
     grid-row: 4 / span 1
     grid-column: -1 / -2
-    text-align: right
-    transform: translateX($shift-column/2)
+    justify-self: end
+    +translateXY($column/2, 0)
 
   .item-subtitle
     grid-row: 4 / span 1
@@ -245,13 +257,12 @@ body
     grid-row: 2 / span 3
     grid-column: 2 / span 3
     margin: 40px 50px
-    transform: translateX($shift-column)
+    +translateXY($column, 0)
 
   .item-box
     grid-row: 1 / span 1
     grid-column: 1 / span 2
-    transform: translateY($shift-row/2)
-
+    +translateXY(0, $row/2)
 
 
 /*------------------------------------*/
@@ -261,9 +272,7 @@ body
   .item-title
     grid-row: 2 / span 2
     grid-column: 3 / span 1
-    transform: rotate(-90deg) // translateY(-$shift-row)
-    // transform-origin: right bottom
-    // 旋轉後位置待調整
+    transform: rotate(-90deg)
     &:before
       content: 'DENIM'
     &:after
@@ -279,7 +288,8 @@ body
     grid-row: 5 / span 1
     grid-column: 2 / span 1
     text-align: right
-    transform: translateY($shift-row/2)
+    justify-self: end
+    align-self: end
 
   .item-subtitle
     grid-row: 1 / span 1
@@ -290,12 +300,12 @@ body
   .item-stripe
     grid-row: 5 / span 1
     grid-column: 3 / span 2
-    transform: translateY($shift-row/2)
+    +translateXY(0, $row/2)
     
   .item-borderBox
     grid-row: 1 / span 2
     grid-column: 2 / span 2
-    transform: translateX($shift-column/2)
+    +translateXY($column/2, 0)
 
   // .item-blank
   //   grid-row: 1 / -1
@@ -307,12 +317,12 @@ body
 /*  E   
 /*------------------------------------*/
 .E-item
-  transform: translateY(-$shift-row)
+  +translateXY(0, -$row)
 
   .item-title
     grid-row: 2 / span 1
     grid-column: 1 / span 3
-    transform: translateY($shift-row/2)
+    align-self: end
     &:before
       content: 'SWEATSHIRTS'
     &:after
@@ -327,22 +337,22 @@ body
   .item-number
     grid-row: 3 / span 1
     grid-column: 2 / span 1
-    transform: translateY($shift-row/2)
+    align-self: end
 
   .item-subtitle
     grid-row: 2 / span 1
     grid-column: 3 / span 2
-    transform: translateX($shift-column*2)
+    +translateXY($column*2, 0)
     
   .item-borderBox
     grid-row: 3 / span 1
     grid-column: 2 / span 2
-    transform: translateY($shift-row/2)
+    +translateXY(0, $row/2)
 
   .item-stripe
     grid-row: 1 / span 1
     grid-column: 1 / span 2
-    transform: translate($shift-column/2, $shift-row/2)
+    +translateXY($column/2, $row/2)
 
   // .item-blank
   //   grid-row: 5 / span 1
@@ -354,13 +364,13 @@ body
 /*  F    
 /*------------------------------------*/
 .F-item
-  transform: translateY($shift-row)
+  +translateXY(0, $row)
 
   .item-title
     grid-row: 1 / span 1
     grid-column: 1 / -1
     text-align: right
-    transform: translateY($shift-row/2)
+    align-self: end
     &:before
       content: 'VINTAGE DENIM'
       right: 0
@@ -375,23 +385,24 @@ body
   .item-number
     grid-row: 3 / span 1
     grid-column: 1 / span 1
-    transform: translate(-$shift-column/2, $shift-row/2)
+    +translateXY(-$column/2, $row/2)
     
   .item-borderBox
     grid-row: 5 / span 1
     grid-column: 1 / -1
-    transform: translateY($shift-row/2)
+    +translateXY(0, $row/2)
 
   .item-subtitle
     grid-row: 5 / span 1
     grid-column: 2 / span 2
     text-align: center
-    transform: translateY($shift-row)
+    +translateXY(0, $row)
+    
 
   .item-box
     grid-row: 4 / span 2
     grid-column: 1 / span 1
-    transform: translateX(-$shift-column/2)
+    +translateXY(-$column/2, 0)
 
 
 
@@ -399,12 +410,12 @@ body
 /*  G    
 /*------------------------------------*/
 .G-item
-  transform: translateY(-$shift-row)
+  +translateXY(0, -$row)
 
   .item-title
     grid-row: 2 / span 2
     grid-column: 3 / span 1
-    transform: rotate(90deg) translateY(-$shift-row/2)
+    transform: rotate(90deg) translateY(-$row/2)
     transform-origin: top left
     &:before
       content: 'EDITION'
@@ -420,17 +431,19 @@ body
   .item-number
     grid-row: 5 / span 1
     grid-column: 3 / span 1
-    text-align: right
-    transform: translateY($shift-row/2)
+    justify-self: end
+    align-self: end
 
   .item-subtitle
+    align-content: end
     grid-row: 1 / span 1
     grid-column: 1 / span 2
+    align-self: end
     
   .item-borderBox
     grid-row: 1 / span 4
     grid-column: 1 / span 2
-    transform: translate($shift-column/2, $shift-row/2)
+    +translateXY($column/2, $row/2)
 
   .item-box
     grid-row: 4 / span 2
@@ -443,10 +456,13 @@ body
 /*------------------------------------*/
 @media (max-width: 991px)
   .B-item
-    transform: translateY($shift-row/2)
+    +translateXY(0, $row/2)
 
   .E-item
-    transform: translateY($shift-row)
+    +translateXY(0, $row)
+    .item-subtitle
+      grid-row: 2 / span 2
+      writing-mode: vertical-lr
 
   .G-item
-    transform: translateY($shift-row*2)
+    +translateXY(0, $row*2)
