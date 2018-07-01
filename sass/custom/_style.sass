@@ -97,6 +97,7 @@ body
   display: grid
   grid-template-rows: repeat(5, $row) // 改設定數值，若區塊內沒有填滿高度欄位才不會變形 | 1fr 每格高度會彈性變化
   grid-template-columns: repeat(4, $column) // 改設定數值 | 1fr 在 RWD 每格寬度會彈性變化
+    
 
 @media (max-width: 991px)
   .grid-container-item
@@ -124,6 +125,7 @@ body
       +title()
     &:before
       +title()
+      // content: attr(data-title)
       height: 24px
       color: rgba($black, 0.5)
       overflow: hidden
@@ -132,6 +134,7 @@ body
       left: 1px 
     &:after
       +title()
+      // content: attr(data-title)
       height: 18px
       color: rgba($black, 0.2)
       overflow: hidden
@@ -178,6 +181,11 @@ body
   [class*="-description"]
     +description()
 
+.grid-container-item:hover
+  [class*="-title"] 
+    color: $gray-400
+    &:before, &:after
+      color: rgba($gray-400, 0.5)
   
 
 /*------------------------------------*/

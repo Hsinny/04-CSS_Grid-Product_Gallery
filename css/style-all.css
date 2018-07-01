@@ -532,6 +532,11 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   line-height: 1.4; }
 
+.grid-container-item:hover [class*="-title"] {
+  color: #707070; }
+  .grid-container-item:hover [class*="-title"]:before, .grid-container-item:hover [class*="-title"]:after {
+    color: rgba(112, 112, 112, 0.5); }
+
 /*------------------------------------*/
 /*  z-index */
 /*------------------------------------*/
