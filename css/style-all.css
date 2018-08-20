@@ -369,21 +369,6 @@ body {
 /*------------------------------------*/
 /* 位移 Row & Column */
 /* 改用 top left 位移 Row & Column */
-body {
-  margin: 120px; }
-
-@media (max-width: 1199px) {
-  body {
-    margin: 120px 80px; } }
-
-@media (max-width: 991px) {
-  body {
-    margin: 120px 80px; } }
-
-@media (max-width: 639px) {
-  body {
-    margin: 120px 0px; } }
-
 /*------------------------------------*/
 /*  Layout Grid */
 /*------------------------------------*/
@@ -1349,6 +1334,9 @@ body {
 /*------------------------------------*/
 /*  Section */
 /*------------------------------------*/
+.section {
+  margin: 120px; }
+
 .section-title {
   font-size: 72px;
   text-align: center;
@@ -1369,6 +1357,22 @@ body {
 
 .icon-goBack:before {
   content: url("../images/icon-angle_left.svg"); }
+
+@media (max-width: 1199px) {
+  .section {
+    margin: 120px 80px; } }
+
+@media (max-width: 991px) {
+  .section {
+    margin: 120px 80px; } }
+
+@media (max-width: 639px) {
+  .section {
+    margin: 60px 0px; }
+  .section-title {
+    font-size: 42px; }
+  .section-subtitle {
+    font-size: 12px; } }
 
 /*------------------------------------*/
 /* Loding */
