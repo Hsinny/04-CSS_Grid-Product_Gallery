@@ -801,7 +801,7 @@ body {
       top: -90.90909px;
       left: 0; } }
   .E-item .item-title {
-    grid-row: 2 / span 1;
+    grid-row: 1 / span 1;
     grid-column: 1 / span 3;
     -webkit-align-self: end;
     -ms-flex-item-align: end;
@@ -1378,16 +1378,25 @@ body {
 /* Loding */
 /*------------------------------------*/
 .loading .section {
+  -webkit-transform: translateX(120vw);
+  -ms-transform: translateX(120vw);
+  transform: translateX(120vw); }
+
+.loading #loading {
+  -webkit-transform: translateX(120vw);
+  -ms-transform: translateX(120vw);
+  transform: translateX(120vw); }
+
+.section {
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
-  -webkit-transform: translateX(-100vw);
-  -ms-transform: translateX(-100vw);
-  transform: translateX(-100vw); }
-
-.loading #loading {
-  -webkit-animation: loading 1s linear;
-  animation: loading 1s linear; }
+  -webkit-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0); }
 
 #loading {
   width: 100%;
@@ -1399,31 +1408,9 @@ body {
   left: 0;
   right: 0;
   z-index: 999;
-  -webkit-transform: translateX(100%);
-  -ms-transform: translateX(100%);
-  transform: translateX(100%);
-  -webkit-transition: all 1s;
-  -o-transition: all 1s;
-  transition: all 1s; }
-
-@-webkit-keyframes loading {
-  0% {
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%); }
-  70% {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%); }
-  100% {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%); } }
-
-@keyframes loading {
-  0% {
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%); }
-  70% {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%); }
-  100% {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%); } }
+  -webkit-transform: translateX(-120vw);
+  -ms-transform: translateX(-120vw);
+  transform: translateX(-120vw);
+  -webkit-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s; }
