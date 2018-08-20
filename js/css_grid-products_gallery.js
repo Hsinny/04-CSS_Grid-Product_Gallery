@@ -11,14 +11,13 @@ for (let i = 0; i < itemImgEl.length; i++) {
 
   // 滑鼠移入
   itemImgEl[i].addEventListener('mousemove', function (e) {
-    targetCenter(e);               // 算出觸發元件(圖片容器)中心點
+    targetCenter(e.target);               // 算出觸發元件(圖片容器)中心點
     motion(e, imgRect);            // 擷取滑鼠座標
   }, false);
 
   // 滑鼠移出，移至原位
   itemImgEl[i].addEventListener('mouseout', function() {
     for (let i = 0; i < itemArray.length; i++) {
-      console.log('init');
       itemArray[i].setAttribute('style', 'translate(0,0);');
     }
   }, false);
@@ -30,13 +29,30 @@ for (let i = 0; i < itemImgEl.length; i++) {
 /* 2. 儲存觸發元件的同層兄弟元件
 /*===================================================================*/
 function targetCenter(el){
-  var elPathItem = el.path;                             // .path 此元件的樹狀路徑，為一陣列
-  for (let i = 0; i < elPathItem.length; i++) {
+
+  /*===================================================================*/
+  /* MouseEvent.path
+  /* safari 無效， chrome 支援
+  /*===================================================================*/
+
+  // 如果不支援 MouseEvent.path 
+  if (!("path" in Event.prototype)) {
+    var path = [];
+    var currentElem = el;
+    do {
+      path.push(currentElem);
+      currentElem = currentElem.parentElement;
+    } while (currentElem.nodeName !== 'BODY');    // 到 body 節點結束不往上儲存
+  } else {
+    var path = el.path;                           // .path 此元件的樹狀路徑，為一陣列   
+  }
+
+  for (let i = 0; i < path.length; i++) {
     
     // 找出觸發元件
-    if (elPathItem[i].className === 'item-img') {       // 找出圖片容器層元件 => 觸發元件  
+    if (path[i].className === 'item-img') {       // 找出圖片容器層元件 => 觸發元件  
       // 算出圖片元件中心點
-      var rectClient = elPathItem[i].getClientRects();  //.getClientRects() 元件佔取頁面矩形區域資訊
+      var rectClient = path[i].getClientRects();  //.getClientRects() 元件佔取頁面矩形區域資訊
       imgRect = {
         centerX: rectClient[0].left + (rectClient[0].width / 2),
         centerY: rectClient[0].top + (rectClient[0].height / 2)
@@ -44,13 +60,14 @@ function targetCenter(el){
 
       itemArray = [];                                   // 清空之前的互動元件
       // 觸發元件的同層兄弟元件
-      var parentEl = elPathItem[i + 1];                 // i+1 => 樹狀路徑上層 => 元件父層
+      var parentEl = path[i + 1];                       // i+1 => 樹狀路徑上層 => 元件父層
       var childEl = parentEl.childNodes;                // 找出父層下的所有子層元件 .childNodes 為陣列
       for (let j = 0; j < childEl.length; j++) {
         if (childEl[j].nodeName !== '#text') {          // 子層元件若為文字節點不儲存
           itemArray.push(childEl[j]);                   // 存入互動元件陣列
         }
       }
+      break;
     }
   }
 }
@@ -98,11 +115,21 @@ for (let i = 0; i < detailLink.length; i++) {
   detailLink[i].addEventListener('click', function (e) {
     e.preventDefault();
 
-    // 取得 href
-    var elPath = e.path;
-    for (let i = 0; i < elPath.length; i++) {
-      if (elPath[i].className === 'detailLink') {
-        var link = elPath[i].getAttribute('href');
+   //  取得 href
+    if (!("path" in Event.prototype)) {
+      var path = [];
+      var currentElem = e.target;
+      do {
+        path.push(currentElem);
+        currentElem = currentElem.parentElement;
+      } while (currentElem.nodeName !== 'BODY');    // 到 body 節點結束不往上儲存
+    } else {
+      var path = e.path;                            // .path 此元件的樹狀路徑，為一陣列   
+    }
+
+    for (let i = 0; i < path.length; i++) {
+      if (path[i].hasAttribute('href')) {  
+        var link = path[i].getAttribute('href');
         break;
       }
     }
@@ -113,7 +140,7 @@ for (let i = 0; i < detailLink.length; i++) {
     setTimeout(function () {
       location.href = link;
     }, 1000);
-  }, true);
+  }, false);
 }
 
 
@@ -177,7 +204,6 @@ $(document).ready(function () {
   });
 
   $('.item-img a').eq(6).click(function () {
-    console.log('7');
     gtag('event', 'view-more-7', {
       'event_category': 'click',
       'event_label': 'img'
