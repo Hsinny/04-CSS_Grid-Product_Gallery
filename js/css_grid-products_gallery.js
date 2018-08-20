@@ -108,8 +108,9 @@ var detailLink = document.querySelectorAll('.detailLink');
 function loading() {
   var bodyEl = document.querySelector('body');
   if (bodyEl) {
-    // bodyEl.className = "";
-    bodyEl.classList = [];
+    setTimeout(function(){
+      bodyEl.classList = [];
+    },100);
   }
 }
 
