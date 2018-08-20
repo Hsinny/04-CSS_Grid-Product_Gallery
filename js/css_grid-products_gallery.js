@@ -11,7 +11,7 @@ for (let i = 0; i < itemImgEl.length; i++) {
 
   // 滑鼠移入
   itemImgEl[i].addEventListener('mousemove', function (e) {
-    targetCenter(e.target);               // 算出觸發元件(圖片容器)中心點
+    targetCenter(e);               // 算出觸發元件(圖片容器)中心點
     motion(e, imgRect);            // 擷取滑鼠座標
   }, false);
 
@@ -28,8 +28,7 @@ for (let i = 0; i < itemImgEl.length; i++) {
 /* 1. 算出觸發元件(圖片容器)中心點
 /* 2. 儲存觸發元件的同層兄弟元件
 /*===================================================================*/
-function targetCenter(el){
-
+function targetCenter(eventEl){
   /*===================================================================*/
   /* MouseEvent.path
   /* safari 無效， chrome 支援
@@ -38,13 +37,13 @@ function targetCenter(el){
   // 如果不支援 MouseEvent.path 
   if (!("path" in Event.prototype)) {
     var path = [];
-    var currentElem = el;
+    var currentElem = eventEl.target;
     do {
       path.push(currentElem);
       currentElem = currentElem.parentElement;
     } while (currentElem.nodeName !== 'BODY');    // 到 body 節點結束不往上儲存
   } else {
-    var path = el.path;                           // .path 此元件的樹狀路徑，為一陣列   
+    var path = eventEl.path;                           // .path 此元件的樹狀路徑，為一陣列   
   }
 
   for (let i = 0; i < path.length; i++) {
@@ -108,8 +107,23 @@ var detailLink = document.querySelectorAll('.detailLink');
 
 function loading() {
   var bodyEl = document.querySelector('body');
-  bodyEl.classList.add('loading');
+  if (bodyEl) {
+    // bodyEl.className = "";
+    bodyEl.classList = [];
+  }
 }
+
+//   bodyEl.classList.add('loading');
+//   setTimeout(function () {
+//     bodyEl.classList = [];
+//   }, 2000);
+// }
+
+// function removeLoading() {
+//   var bodyEl = document.querySelector('body');
+//   bodyEl.classList = [];
+// }
+
 
 for (let i = 0; i < detailLink.length; i++) {
   detailLink[i].addEventListener('click', function (e) {
@@ -134,15 +148,16 @@ for (let i = 0; i < detailLink.length; i++) {
       }
     }
 
-    loading();
+    // loading();
 
     // 延遲執行 // 跳轉至指定的 url 頁面
     setTimeout(function () {
       location.href = link;
-    }, 1000);
+    }, 0);
   }, false);
 }
 
+loading();
 
 /*===================================================================*/
 /* jQuery
