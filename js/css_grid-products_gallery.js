@@ -85,6 +85,39 @@ function motion(e, imgRect) {
 
 
 /*===================================================================*/
+/* a link
+/*===================================================================*/
+var detailLink = document.querySelectorAll('.detailLink');
+
+function loading() {
+  var bodyEl = document.querySelector('body');
+  bodyEl.classList.add('loading');
+}
+
+for (let i = 0; i < detailLink.length; i++) {
+  detailLink[i].addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // 取得 href
+    var elPath = e.path;
+    for (let i = 0; i < elPath.length; i++) {
+      if (elPath[i].className === 'detailLink') {
+        var link = elPath[i].getAttribute('href');
+        break;
+      }
+    }
+
+    loading();
+
+    // 延遲執行 // 跳轉至指定的 url 頁面
+    setTimeout(function () {
+      location.href = link;
+    }, 1000);
+  }, true);
+}
+
+
+/*===================================================================*/
 /* jQuery
 /*===================================================================*/
 

@@ -32,7 +32,7 @@ $column: 120px
 
 =stripe($deg)
   background: linear-gradient($deg, $primary 25%, transparent 0, transparent 50%, $primary 0, $primary 75%, transparent 0)     
-  background-size: 50px 50px
+  background-size: 12px 12px
 
 /* 位移 Row & Column */
 =translateXY($shift-column: $column, $shift-row: $row)
@@ -181,7 +181,7 @@ body
     +stripe(-45deg)
     transition: all 1s
     position: relative
-    z-index: 3
+    z-index: -1
 
   [class*="-borderBox"]
     border: 20px solid $green
@@ -247,7 +247,7 @@ body
 
   .item-stripe
     grid-row: 5 / span 1 
-    grid-column: 1 / span 2
+    grid-column: 1 / span 3
     +offsetXY($column/2, -$row/2)
 
   .item-borderBox
@@ -376,8 +376,8 @@ body
     +offsetXY(0, 0)
 
   .item-stripe
-    grid-row: 5 / span 1
-    grid-column: 3 / span 2
+    grid-row: 3 / span 3
+    grid-column: 2 / span 2
     +offsetXY(0, $row/2)
     
   .item-borderBox
@@ -884,3 +884,34 @@ body
   
 .icon-goBack:before
   content: url("../images/icon-angle_left.svg")
+
+  
+/*------------------------------------*/
+/* Loding 
+/*------------------------------------*/ 
+.loading  // body
+  .section
+    transition: all 1s
+    transform: translateX(-100vw)
+  #loading
+    animation: loading 1s linear
+
+#loading
+  +size(100%)
+  background-color: rgba($primary, 0.9)
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 999
+  transform: translateX(100%)
+  transition: all 1s
+
+@keyframes loading 
+  0%
+    transform: translateX(100%)
+  70%
+    transform: translateX(0%)
+  100%
+    transform: translateX(-100%)

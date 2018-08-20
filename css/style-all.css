@@ -519,12 +519,12 @@ body {
   background: -webkit-linear-gradient(135deg, #25b99a 25%, transparent 0, transparent 50%, #25b99a 0, #25b99a 75%, transparent 0);
   background: -o-linear-gradient(135deg, #25b99a 25%, transparent 0, transparent 50%, #25b99a 0, #25b99a 75%, transparent 0);
   background: linear-gradient(-45deg, #25b99a 25%, transparent 0, transparent 50%, #25b99a 0, #25b99a 75%, transparent 0);
-  background-size: 50px 50px;
+  background-size: 12px 12px;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
   position: relative;
-  z-index: 3; }
+  z-index: -1; }
 
 .grid-container-item [class*="-borderBox"], .grid-container-detail [class*="-borderBox"] {
   border: 20px solid #25b99a;
@@ -614,7 +614,7 @@ body {
 
 .A-item .item-stripe {
   grid-row: 5 / span 1;
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   top: -50px;
   left: 60px; }
   @media (max-width: 479px) {
@@ -786,8 +786,8 @@ body {
       left: 0; } }
 
 .D-item .item-stripe {
-  grid-row: 5 / span 1;
-  grid-column: 3 / span 2;
+  grid-row: 3 / span 3;
+  grid-column: 2 / span 2;
   top: 50px;
   left: 0; }
   @media (max-width: 479px) {
@@ -1369,3 +1369,57 @@ body {
 
 .icon-goBack:before {
   content: url("../images/icon-angle_left.svg"); }
+
+/*------------------------------------*/
+/* Loding */
+/*------------------------------------*/
+.loading .section {
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+  -webkit-transform: translateX(-100vw);
+  -ms-transform: translateX(-100vw);
+  transform: translateX(-100vw); }
+
+.loading #loading {
+  -webkit-animation: loading 1s linear;
+  animation: loading 1s linear; }
+
+#loading {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(37, 185, 154, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  -webkit-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s; }
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%); }
+  70% {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%); }
+  100% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%); } }
+
+@keyframes loading {
+  0% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%); }
+  70% {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%); }
+  100% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%); } }
