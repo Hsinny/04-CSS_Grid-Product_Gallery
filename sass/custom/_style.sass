@@ -32,7 +32,7 @@ $column: 120px
 
 =stripe($deg)
   background: linear-gradient($deg, $primary 25%, transparent 0, transparent 50%, $primary 0, $primary 75%, transparent 0)     
-  background-size: 12px 12px
+  background-size: 50px 50px
 
 /* 位移 Row & Column */
 =translateXY($shift-column: $column, $shift-row: $row)
@@ -201,7 +201,7 @@ $column: 120px
     grid-row: 1 / span 1
     grid-column: 1 / -1
     align-self: end
-    +offsetXY(0, -$row/2)
+    +offsetXY(0, -$row)
     &:before
       content: 'LINEN BLAZER'
     &:after
@@ -352,8 +352,8 @@ $column: 120px
     +offsetXY(0, 0)
 
   .item-stripe
-    grid-row: 3 / span 3
-    grid-column: 2 / span 2
+    grid-row: 4 / span 2
+    grid-column: 3 / span 2
     +offsetXY(0, $row/2)
     
   .item-borderBox
