@@ -343,7 +343,7 @@ ul {
 /*------------------------------------*/
 body {
   color: #21212A;
-  font-family: Montserrat, "蘋果儷中黑", "Apple LiGothic Medium", Arial, Helvetica, sans-serif; }
+  font-family: Montserrat, "Microsoft JhengHei", "微軟正黑體", "蘋果儷中黑", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
 
 /*------------------------------------*/
 /*  My Normalize */
@@ -501,10 +501,10 @@ body {
       font-size: 30px; } }
 
 .grid-container-item [class*="-stripe"], .grid-container-detail [class*="-stripe"] {
-  background: -webkit-linear-gradient(135deg, #25b99a 25%, transparent 0, transparent 50%, #25b99a 0, #25b99a 75%, transparent 0);
-  background: -o-linear-gradient(135deg, #25b99a 25%, transparent 0, transparent 50%, #25b99a 0, #25b99a 75%, transparent 0);
-  background: linear-gradient(-45deg, #25b99a 25%, transparent 0, transparent 50%, #25b99a 0, #25b99a 75%, transparent 0);
-  background-size: 12px 12px;
+  background: -webkit-linear-gradient(135deg, #50E3C2 25%, transparent 0, transparent 50%, #50E3C2 0, #50E3C2 75%, transparent 0);
+  background: -o-linear-gradient(135deg, #50E3C2 25%, transparent 0, transparent 50%, #50E3C2 0, #50E3C2 75%, transparent 0);
+  background: linear-gradient(-45deg, #50E3C2 25%, transparent 0, transparent 50%, #50E3C2 0, #50E3C2 75%, transparent 0);
+  background-size: 50px 50px;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
@@ -512,7 +512,7 @@ body {
   z-index: -1; }
 
 .grid-container-item [class*="-borderBox"], .grid-container-detail [class*="-borderBox"] {
-  border: 20px solid #25b99a;
+  border: 20px solid #50E3C2;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
@@ -536,7 +536,7 @@ body {
       font-size: 20px; } }
 
 .grid-container-item [class*="-box"], .grid-container-detail [class*="-box"] {
-  background-color: #25b99a;
+  background-color: #50E3C2;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
@@ -565,11 +565,11 @@ body {
   -webkit-align-self: end;
   -ms-flex-item-align: end;
   align-self: end;
-  top: -50px;
+  top: -100px;
   left: 0; }
   @media (max-width: 479px) {
     .A-item .item-title {
-      top: -45.45455px;
+      top: -90.90909px;
       left: 0; } }
   .A-item .item-title:before {
     content: 'LINEN BLAZER'; }
@@ -771,8 +771,8 @@ body {
       left: 0; } }
 
 .D-item .item-stripe {
-  grid-row: 3 / span 3;
-  grid-column: 2 / span 2;
+  grid-row: 4 / span 2;
+  grid-column: 3 / span 2;
   top: 50px;
   left: 0; }
   @media (max-width: 479px) {
@@ -1353,7 +1353,7 @@ body {
   display: inline-block;
   vertical-align: text-bottom; }
   .goBack:hover {
-    background-color: #25b99a; }
+    background-color: #50E3C2; }
 
 .icon-goBack:before {
   content: url("../images/icon-angle_left.svg"); }
@@ -1401,7 +1401,7 @@ body {
 #loading {
   width: 100%;
   height: 100%;
-  background-color: rgba(37, 185, 154, 0.9);
+  background-color: rgba(80, 227, 194, 0.9);
   position: fixed;
   top: 0;
   bottom: 0;
